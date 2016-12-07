@@ -6,7 +6,7 @@ package com.wang.extmall.command;
  * @author   <a href="mailto:chenglong.du@ozstrategy.com">Chenglong Du</a>
  * @version  08/22/2016 14:38
  */
-public class LoginForm {
+public class LoginCommand {
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
   private String name;
@@ -79,4 +79,4 @@ public class LoginForm {
   public void setRole(String role) {
     this.role = role;
   }
-} // end class LoginForm
+} // end class LoginCommand

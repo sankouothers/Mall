@@ -1,7 +1,5 @@
 package com.wang.extmall.model;
 
-import java.io.Serializable;
-
 import java.util.Date;
 import java.util.Set;
 
@@ -16,21 +14,13 @@ import javax.persistence.ManyToMany;
 
 
 /**
- * Created by ozintel06 on 16/7/24.
+ * Created by ozintel06 on 2016/12/6.
  *
- * @author   <a href="mailto:chenglong.du@ozstrategy.com">Chenglong Du</a>
- * @version  07/27/2016 21:39
- */
-@Entity public class User implements Serializable {
-  //~ Static fields/initializers ---------------------------------------------------------------------------------------
-
-  /** Use serialVersionUID for interoperability. */
-  private static final long serialVersionUID = 917331463781881956L;
-
+ * @author   <a href="mailto:pin.wang@ozstrategy.com">Pin Wang</a>
+ * @version  12/06/2016 16:22
+ */@Entity
+public class Role {
   //~ Instance fields --------------------------------------------------------------------------------------------------
-
-// @OneToMany private Set<Address> addressSet;
-
 
   @Column(nullable = false)
   private Date createDate;
@@ -44,36 +34,12 @@ import javax.persistence.ManyToMany;
   )
   private String name;
 
-  @Column(
-    length   = 16,
-    nullable = false
-  )
-  private String passWord;
-
   @JoinTable(
-    name               = "User_Role", // 中间表名
-    joinColumns        = { @JoinColumn(name = "user_id") },
-    inverseJoinColumns = { @JoinColumn(name = "role_id") }
+    name               = "User_Role",                       // 中间表名
+    joinColumns        = { @JoinColumn(name = "role_id") }, // 设置自己在中间表的对应外键
+    inverseJoinColumns = { @JoinColumn(name = "user_id") }  // 设置对方在中间表的对应外键
   )
-  @ManyToMany private Set<Role> roleSet;
-
-  //~ Constructors -----------------------------------------------------------------------------------------------------
-
-  /**
-   * Creates a new User object.
-   */
-  public User() { }
-
-  /**
-   * Creates a new User object.
-   *
-   * @param  user  User
-   */
-  public User(User user) {
-    this.passWord = user.getPassWord();
-    this.name     = user.getName();
-    this.id       = user.getId();
-  }
+  @ManyToMany private Set<User> userSet;
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
@@ -111,23 +77,12 @@ import javax.persistence.ManyToMany;
   //~ ------------------------------------------------------------------------------------------------------------------
 
   /**
-   * getter method for pass word.
-   *
-   * @return  String
-   */
-  public String getPassWord() {
-    return passWord;
-  }
-
-  //~ ------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * getter method for role set.
+   * getter method for user set.
    *
    * @return  Set
    */
-  public Set<Role> getRoleSet() {
-    return roleSet;
+  public Set<User> getUserSet() {
+    return userSet;
   }
 
   //~ ------------------------------------------------------------------------------------------------------------------
@@ -166,23 +121,11 @@ import javax.persistence.ManyToMany;
   //~ ------------------------------------------------------------------------------------------------------------------
 
   /**
-   * setter method for pass word.
+   * setter method for user set.
    *
-   * @param  passWord  String
+   * @param  userSet  Set
    */
-  public void setPassWord(String passWord) {
-    this.passWord = passWord;
+  public void setUserSet(Set<User> userSet) {
+    this.userSet = userSet;
   }
-
-  //~ ------------------------------------------------------------------------------------------------------------------
-
-  /**
-   * setter method for role set.
-   *
-   * @param  roleSet  Set
-   */
-  public void setRoleSet(Set<Role> roleSet) {
-    this.roleSet = roleSet;
-
-  }
-} // end class User
+} // end class Role

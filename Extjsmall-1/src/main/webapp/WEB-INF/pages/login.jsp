@@ -42,7 +42,7 @@
       <!-- Tab panes -->
       <div class="tab-content">
         <div role="tabpanel" class="tab-pane active">
-          <form action="<c:url value="/consumer/login"/>" method="post" class="form-horizontal">
+          <form action="<c:url value="/j_spring_security_check"/>" method="post" class="form-horizontal">
             <div class="form-group">
 
             </div>
