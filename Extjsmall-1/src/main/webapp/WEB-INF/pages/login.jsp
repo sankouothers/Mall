@@ -33,9 +33,14 @@
   <div class="well" style="background:transparent; border: 0; width: 40%; margin: 0 20%  20px 20% ;">
 
     <h1 class="text-center">登录</h1>
-    <c:if test="${param.failed eq 'true'}">
-      <div class="col-sm-10 alert alert-danger" role="alert">
-        Username , password or role is not match.
+    <%--<c:if test="${param.failed eq 'true'}">--%>
+      <%--<div class="col-sm-10 alert alert-danger" role="alert">--%>
+        <%--Username , password or role is not match.--%>
+      <%--</div>--%>
+    <%--</c:if>--%>
+    <c:if test="${not empty param.error}">
+      <div class="col-sm-12 alert alert-danger" role="alert">
+        Invalid User Name or Password. Please try again.
       </div>
     </c:if>
     <div>

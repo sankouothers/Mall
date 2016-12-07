@@ -57,16 +57,23 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
   @Override protected void configure(HttpSecurity http) throws Exception {
     http
         .csrf().disable()
-        .authorizeRequests().antMatchers("/extmall","/login")
-        .permitAll().anyRequest().authenticated()
+        .authorizeRequests()
+        .antMatchers("/login", "/extmall").permitAll()
+        .anyRequest().authenticated()
         .and()
         .formLogin()
         .loginPage("/login")
-        .failureUrl("/login?failed=true")
+        .failureUrl("/login?error=true")
+        .loginProcessingUrl("/j_spring_security_check")
+        .usernameParameter("j_username")
+        .passwordParameter("j_password")
+        .permitAll()
         .and()
         .logout()
-        .logoutUrl("/extmall")
-        .permitAll();
+        .logoutUrl("/logout")
+        .logoutSuccessUrl("/extmall")
+        .invalidateHttpSession(true);
+
 
   }
 }
