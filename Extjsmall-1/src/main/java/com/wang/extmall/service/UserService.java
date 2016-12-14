@@ -2,6 +2,8 @@ package com.wang.extmall.service;
 
 import com.wang.extmall.model.User;
 
+import java.util.List;
+
 
 /**
  * Created by ozintel06 on 16/7/27.
@@ -20,6 +22,8 @@ public interface UserService {
    * @return  User
    */
   User findByName(String name);
+
+  List<User> findAll();
 
   //~ ------------------------------------------------------------------------------------------------------------------
 

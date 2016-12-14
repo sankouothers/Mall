@@ -46,29 +46,29 @@
     <div>
       <!-- Tab panes -->
       <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active">
-          <form action="<c:url value="/j_spring_security_check"/>" method="post" class="form-horizontal">
+        <div class="tab-pane active">
+          <form action="<c:url value='/j_spring_security_check'/>" method="post" class="form-horizontal">
             <div class="form-group">
 
             </div>
             <div class="form-group">
 
               <div class="col-sm-12 form-group-lg">
-                <input id="userName" type="text" name="name" class="form-control" placeholder="Username">
+                <input id="name" type="text" name="name" class="form-control" placeholder="Username">
               </div>
             </div>
 
             <div class="form-group">
 
               <div class="col-sm-12 form-group-lg">
-                <input id="passWord" type="password" name="password" class="form-control"
+                <input id="passWord" type="password" name="passWord" class="form-control"
                        placeholder="Password">
               </div>
             </div>
 
             <div class="form-group">
               <div class="col-sm-12" align="center">
-                <button type="submit" class="btn btn-primary btn-lg btn-block " id="submitBtn">Sign in</button>
+                <button type="submit" class="btn btn-primary btn-lg btn-block ">Sign in</button>
               </div>
             </div>
             <div class="form-group">

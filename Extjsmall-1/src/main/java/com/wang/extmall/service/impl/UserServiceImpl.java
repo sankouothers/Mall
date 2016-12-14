@@ -10,6 +10,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.wang.extmall.repository.UserRepository;
 
+import java.util.List;
+
 
 /**
  * Created by ozintel06 on 16/7/27.
@@ -29,6 +31,11 @@ import com.wang.extmall.repository.UserRepository;
    */
   @Override public User findByName(String name) {
     return userRepository.findByName(name);
+  }
+
+  @Override
+  public List<User> findAll() {
+    return (List<User>) userRepository.findAll();
   }
 
   //~ ------------------------------------------------------------------------------------------------------------------

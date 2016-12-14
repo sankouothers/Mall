@@ -39,7 +39,7 @@ import com.wang.extmall.service.UserService;
     method = RequestMethod.POST
   )
   public String login(HttpServletRequest request, LoginCommand command) {
-    return "extmall";
+    return "redirect:/extmall";
   }
 
   //~ ------------------------------------------------------------------------------------------------------------------

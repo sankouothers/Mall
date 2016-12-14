@@ -3,6 +3,7 @@ package com.wang.extmall.config;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -23,7 +24,7 @@ import org.springframework.security.util.SimpleMethodInvocation;
 public class UserDetail extends User implements UserDetails {
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
-  private List<Role> roles;
+  private Set<Role> roles;
 
   //~ Constructors -----------------------------------------------------------------------------------------------------
 
@@ -33,7 +34,7 @@ public class UserDetail extends User implements UserDetails {
    * @param  user   User
    * @param  roles  List
    */
-  public UserDetail(User user, List<Role> roles) {
+  public UserDetail(User user, Set<Role> roles) {
     super(user);
     this.roles = roles;
   }

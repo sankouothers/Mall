@@ -1,20 +1,23 @@
 package com.wang.extmall.service;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Set;
 
-import com.wang.extmall.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import org.springframework.stereotype.Service;
 
+import org.springframework.transaction.annotation.Transactional;
+
 import com.wang.extmall.config.UserDetail;
 import com.wang.extmall.model.Role;
 import com.wang.extmall.model.User;
+import com.wang.extmall.repository.UserRepository;
 
 
 /**
@@ -23,7 +26,7 @@ import com.wang.extmall.model.User;
  * @author   <a href="mailto:pin.wang@ozstrategy.com">Pin Wang</a>
  * @version  12/06/2016 16:22
  */
-@Service public class MyUserDetailsService implements UserDetailsService {
+@Service @Transactional public class MyUserDetailsService implements UserDetailsService {
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
   @Autowired private UserRepository userRepository;
@@ -33,29 +36,11 @@ import com.wang.extmall.model.User;
   /**
    * @see  org.springframework.security.core.userdetails.UserDetailsService#loadUserByUsername(java.lang.String)
    */
-  @Override public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-    User user;
+  @Override public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    User      user    = userRepository.findByName(username);
+    Set<Role> roleSet = user.getRoleSet();
 
-    try {
-      user = userRepository.findByName(userName);
-    } catch (Exception e) {
-      throw new UsernameNotFoundException("user select fail");
-    }
+    return new UserDetail(user, roleSet);
+  }
 
-    if (user == null) {
-      throw new UsernameNotFoundException("no user found");
-    } else {
-      try {
-        List<Role> roles = new ArrayList<Role>();
-
-        for (Role role : user.getRoleSet()) {
-          roles.add(role);
-        }
-
-        return new UserDetail(user, roles);
-      } catch (Exception e) {
-        throw new UsernameNotFoundException("user role select fail");
-      }
-    }
-  } // end method loadUserByUsername
 } // end class MyUserDetailsService

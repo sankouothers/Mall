@@ -1,6 +1,7 @@
 package com.wang.extmall.config;
 
 
+import com.wang.extmall.service.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +24,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   @Autowired private UserAuthenticationProvider provider;
-
+//  @Autowired private MyUserDetailsService myUserDetailsService;
   /**
    * @see  org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.WebSecurity)
    */
@@ -46,7 +47,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
    * @throws  Exception  exception
    */
   @Autowired public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+    //     在内存中创建了一个用户，该用户的名称为user，密码为password，用户角色为USER。
+//    .inMemoryAuthentication().withUser("user").password("password").roles("USER");
+//    auth.userDetailsService(userLoginService);
     auth.authenticationProvider(provider);
+//    auth.inMemoryAuthentication().withUser("mkyong").password("123456").roles("USER");
   }
 
   //~ ------------------------------------------------------------------------------------------------------------------
@@ -55,25 +60,28 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
    * @see  org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter#configure(org.springframework.security.config.annotation.web.builders.HttpSecurity)
    */
   @Override protected void configure(HttpSecurity http) throws Exception {
-    http
-        .csrf().disable()
+    http.csrf().disable().authorizeRequests()
+        .and()
+//      authorizeRequests()定义哪些URL需要被保护、哪些不需要被保护
         .authorizeRequests()
-        .antMatchers("/login", "/extmall").permitAll()
+        //        定义不用限制的路径
+//        .antMatchers("请求路径").permitAll()
+//        .antMatchers("/extmall").permitAll()
+        //        定义需要控制访问的路径
+//        .antMatchers("请求路径").hasRole("角色")
+        .antMatchers("/extmall").hasRole("USER")
         .anyRequest().authenticated()
+//      formLogin()定义当需要用户登录时候，转到的登录页面
         .and()
         .formLogin()
         .loginPage("/login")
+        .usernameParameter("name")
+        .passwordParameter("passWord")
         .failureUrl("/login?error=true")
-        .loginProcessingUrl("/j_spring_security_check")
-        .usernameParameter("j_username")
-        .passwordParameter("j_password")
         .permitAll()
         .and()
         .logout()
-        .logoutUrl("/logout")
-        .logoutSuccessUrl("/extmall")
-        .invalidateHttpSession(true);
-
-
+        .permitAll();
+    http.headers().frameOptions().disable();
   }
 }

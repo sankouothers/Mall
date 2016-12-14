@@ -10,9 +10,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+
 import org.springframework.stereotype.Component;
 
 import com.wang.extmall.service.MyUserDetailsService;
@@ -25,24 +25,29 @@ import com.wang.extmall.service.MyUserDetailsService;
  * @version  12/06/2016 16:09
  */
 @Component public class UserAuthenticationProvider implements AuthenticationProvider {
+  //~ Instance fields --------------------------------------------------------------------------------------------------
 
+  @Autowired private MyUserDetailsService userDetailsService;
 
-  @Autowired
-  private MyUserDetailsService userDetailsService;
+  //~ Methods ----------------------------------------------------------------------------------------------------------
 
-  @Override
-  public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+  /**
+   * @see  org.springframework.security.authentication.AuthenticationProvider#authenticate(org.springframework.security.core.Authentication)
+   */
+  @Override public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    UserDetails userDetails = userDetailsService.loadUserByUsername(authentication.getName());
 
-      UserDetails userDetails = userDetailsService.loadUserByUsername(authentication.getName());
-
-      UsernamePasswordAuthenticationToken result = new UsernamePasswordAuthenticationToken(
-          userDetails, authentication.getCredentials(),userDetails.getAuthorities());
-      return result;
+    return new UsernamePasswordAuthenticationToken(
+        userDetails, authentication.getCredentials(), userDetails.getAuthorities());
 
   }
 
-  @Override
-  public boolean supports(Class<?> aClass) {
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * @see  org.springframework.security.authentication.AuthenticationProvider#supports(java.lang.Class)
+   */
+  @Override public boolean supports(Class<?> aClass) {
     return true;
   }
 } // end class UserAuthenticationProvider
