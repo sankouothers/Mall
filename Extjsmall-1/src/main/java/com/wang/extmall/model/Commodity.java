@@ -1,42 +1,35 @@
 package com.wang.extmall.model;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 
 
 /**
- * Created by ozintel06 on 2016/12/6.
+ * Created by ozintel06 on 2016/12/16.
  *
  * @author   <a href="mailto:pin.wang@ozstrategy.com">Pin Wang</a>
- * @version  12/06/2016 16:22 角色表(确定用户可以访问的路径)
+ * @version  12/16/2016 13:55 商品表
  */
-@Entity public class Role {
+@Entity public class Commodity {
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
   @Column(
     nullable  = false,
     updatable = false
   )
-  private Date createDate;
-
+  private Date     createDate;
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Id private Long id;
-
   @Column(
     length   = 12,
-    nullable = false,
-    unique   = true
+    nullable = false
   )
-  private String name;
+  private String   name;
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
@@ -103,4 +96,4 @@ import javax.persistence.ManyToMany;
   public void setName(String name) {
     this.name = name;
   }
-} // end class Role
+} // end class Commodity

@@ -66,10 +66,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
         .authorizeRequests()
         //        定义不用限制的路径
 //        .antMatchers("请求路径").permitAll()
-//        .antMatchers("/extmall").permitAll()
+        .antMatchers("/extmall").permitAll()
         //        定义需要控制访问的路径
 //        .antMatchers("请求路径").hasRole("角色")
-        .antMatchers("/extmall").hasRole("USER")
+//        .antMatchers("/extmall").hasRole("USER")
         .anyRequest().authenticated()
 //      formLogin()定义当需要用户登录时候，转到的登录页面
         .and()
