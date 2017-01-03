@@ -1,164 +1,38 @@
-package com.wang.extmall.model;
-
-import java.io.Serializable;
+package com.wang.extmall.command;
 
 import java.util.Date;
 import java.util.Set;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinColumns;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
-
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+import com.wang.extmall.model.Address;
+import com.wang.extmall.model.Commodity;
+import com.wang.extmall.model.Role;
+import com.wang.extmall.model.User;
+import com.wang.extmall.util.Util;
 
 
 /**
- * Created by ozintel06 on 16/7/24.
+ * Created by ozintel06 on 2016/12/27.
  *
- * @author   <a href="mailto:chenglong.du@ozstrategy.com">Chenglong Du</a>
- * @version  07/27/2016 21:39 用户表
+ * @author   <a href="mailto:pin.wang@ozstrategy.com">Pin Wang</a>
+ * @version  12/27/2016 17:50
  */
-@Entity public class User implements Serializable {
-  //~ Static fields/initializers ---------------------------------------------------------------------------------------
-
-  /** Use serialVersionUID for interoperability. */
-  private static final long serialVersionUID = 917331463781881956L;
-
+public class UserCommand {
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
-  @Cascade({ CascadeType.SAVE_UPDATE })
-  @JoinTable(
-    name               = "UserAddress",
-    joinColumns        = {
-      @JoinColumn(
-        name           = "userId",
-        nullable       = false,
-        updatable      = false
-      )
-    },
-    inverseJoinColumns = {
-      @JoinColumn(
-        name           = "addressId",
-        nullable       = false,
-        updatable      = false
-      )
-    }
-  )
-  @OneToMany private Set<Address> addressSet;
-@Cascade({ CascadeType.SAVE_UPDATE })
-  @JoinTable(
-    name               = "MerchantCommodity",
-    joinColumns        = {
-      @JoinColumn(
-        name           = "userId",
-        nullable       = false,
-        updatable      = false
-      )
-    },
-    inverseJoinColumns = {
-      @JoinColumn(
-        name           = "commodityId",
-        nullable       = false,
-        updatable      = false
-      )
-    }
-  )
-  @OneToMany private Set<Commodity> commoditySet;
+  private Set<Address>   addressSet;
+  private String         answer;
+  private Set<Commodity> commoditySet;
+  private Date           createDate;
+  private String         createDateString;
+  private Long           id;
+  private String         iDCardNumber;
+  private String         name;
+  private String         passWord;
+  private String         phoneNumber;
+  private String         question;
+  private Set<Role>      roleSet;
 
-  @Column(
-    length   = 100,
-    nullable = false
-  )
-  private String answer;
-
-  @Column(
-    nullable  = false,
-    updatable = false
-  )
-  private Date createDate;
-
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Id private Long id;
-
-  @Column(
-    length   = 18,
-    nullable = false
-  )
-  private String iDCardNumber;
-
-  @Column(
-    length   = 12,
-    nullable = false
-  )
-  private String name;
-
-  @Column(
-    length   = 16,
-    nullable = false
-  )
-  private String passWord;
-
-  @Column(
-    length   = 11,
-    nullable = false
-  )
-  private String phoneNumber;
-  @Column(
-    length   = 100,
-    nullable = false
-  )
-  private String question;
-
-  @Cascade({ CascadeType.SAVE_UPDATE })
-  @JoinTable(
-    name               = "UserRole", // 中间表名
-    joinColumns        = {
-      @JoinColumn(
-        name           = "userId",
-        nullable       = false,
-        updatable      = false
-      )
-    },                               // 设置自己在中间表的对应外键
-    inverseJoinColumns = {
-      @JoinColumn(
-        name           = "roleId",
-        nullable       = false,
-        updatable      = false
-      )
-    }                                // 设置对方在中间表的对应外键
-  )
-  @ManyToMany(fetch = FetchType.EAGER)
-  private Set<Role> roleSet;
-
-  @Column(nullable = false)
   private String userName;
-
-  //~ Constructors -----------------------------------------------------------------------------------------------------
-
-  /**
-   * Creates a new User object.
-   */
-  public User() { }
-
-  /**
-   * Creates a new User object.
-   *
-   * @param  user  User
-   */
-  public User(User user) {
-    this.passWord = user.getPassWord();
-    this.name     = user.getName();
-    this.id       = user.getId();
-  }
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
@@ -185,12 +59,34 @@ import org.hibernate.annotations.CascadeType;
   //~ ------------------------------------------------------------------------------------------------------------------
 
   /**
+   * getter method for commodity set.
+   *
+   * @return  Set
+   */
+  public Set<Commodity> getCommoditySet() {
+    return commoditySet;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
    * getter method for create date.
    *
    * @return  Date
    */
   public Date getCreateDate() {
     return createDate;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * getter method for create date string.
+   *
+   * @return  String
+   */
+  public String getCreateDateString() {
+    return createDateString;
   }
 
   //~ ------------------------------------------------------------------------------------------------------------------
@@ -306,12 +202,34 @@ import org.hibernate.annotations.CascadeType;
   //~ ------------------------------------------------------------------------------------------------------------------
 
   /**
+   * setter method for commodity set.
+   *
+   * @param  commoditySet  Set
+   */
+  public void setCommoditySet(Set<Commodity> commoditySet) {
+    this.commoditySet = commoditySet;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
    * setter method for create date.
    *
    * @param  createDate  Date
    */
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * setter method for create date string.
+   *
+   * @param  createDateString  String
+   */
+  public void setCreateDateString(String createDateString) {
+    this.createDateString = createDateString;
   }
 
   //~ ------------------------------------------------------------------------------------------------------------------
@@ -389,7 +307,6 @@ import org.hibernate.annotations.CascadeType;
    */
   public void setRoleSet(Set<Role> roleSet) {
     this.roleSet = roleSet;
-
   }
 
   //~ ------------------------------------------------------------------------------------------------------------------
@@ -403,11 +320,39 @@ import org.hibernate.annotations.CascadeType;
     this.userName = userName;
   }
 
-  public Set<Commodity> getCommoditySet() {
-    return commoditySet;
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * toUser.
+   *
+   * @return  User
+   */
+  public User toUser() {
+    User user = new User();
+    user.setId(this.getId());
+    user.setName(this.getName());
+    user.setAnswer(this.getAnswer());
+    user.setiDCardNumber(this.getiDCardNumber());
+    user.setUserName(this.getUserName());
+    user.setQuestion(this.getQuestion());
+    user.setPassWord(this.getPassWord());
+    user.setPhoneNumber(this.getPhoneNumber());
+
+    return user;
   }
 
-  public void setCommoditySet(Set<Commodity> commoditySet) {
-    this.commoditySet = commoditySet;
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * toUserInfo.
+   *
+   * @param  user  User
+   */
+  public void toUserInfo(User user) {
+    this.setCreateDateString(Util.sdf.format(user.getCreateDate()));
+    this.setUserName(user.getUserName());
+    this.setId(user.getId());
+    this.setQuestion(user.getQuestion());
+    this.setPhoneNumber(user.getPhoneNumber());
   }
-} // end class User
+} // end class UserCommand

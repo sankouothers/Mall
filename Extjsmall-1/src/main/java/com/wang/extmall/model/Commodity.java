@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 
 /**
@@ -18,11 +20,25 @@ import javax.persistence.Id;
 @Entity public class Commodity {
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
+  @Column(length = 50)
+  private String brand;
+  @Column(length = 50)
+  private String category;
+
   @Column(
     nullable  = false,
     updatable = false
   )
   private Date     createDate;
+
+  @Column(
+    nullable  = false,
+    updatable = false
+  )
+  private Long     price;
+
+  @Column(length = 50)
+  private String   effect;
   @GeneratedValue(strategy = GenerationType.AUTO)
   @Id private Long id;
   @Column(
@@ -31,7 +47,33 @@ import javax.persistence.Id;
   )
   private String   name;
 
+  @JoinColumn(name = "merchantId")
+  @ManyToOne
+  private User   creator;
+
   //~ Methods ----------------------------------------------------------------------------------------------------------
+
+  /**
+   * getter method for brand.
+   *
+   * @return  String
+   */
+  public String getBrand() {
+    return brand;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * getter method for category.
+   *
+   * @return  String
+   */
+  public String getCategory() {
+    return category;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
 
   /**
    * getter method for create date.
@@ -40,6 +82,17 @@ import javax.persistence.Id;
    */
   public Date getCreateDate() {
     return createDate;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * getter method for effect.
+   *
+   * @return  String
+   */
+  public String getEffect() {
+    return effect;
   }
 
   //~ ------------------------------------------------------------------------------------------------------------------
@@ -67,12 +120,45 @@ import javax.persistence.Id;
   //~ ------------------------------------------------------------------------------------------------------------------
 
   /**
+   * setter method for brand.
+   *
+   * @param  brand  String
+   */
+  public void setBrand(String brand) {
+    this.brand = brand;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * setter method for category.
+   *
+   * @param  category  String
+   */
+  public void setCategory(String category) {
+    this.category = category;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
    * setter method for create date.
    *
    * @param  createDate  Date
    */
   public void setCreateDate(Date createDate) {
     this.createDate = createDate;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * setter method for effect.
+   *
+   * @param  effect  String
+   */
+  public void setEffect(String effect) {
+    this.effect = effect;
   }
 
   //~ ------------------------------------------------------------------------------------------------------------------
@@ -95,5 +181,21 @@ import javax.persistence.Id;
    */
   public void setName(String name) {
     this.name = name;
+  }
+
+  public User getCreator() {
+    return creator;
+  }
+
+  public void setCreator(User creator) {
+    this.creator = creator;
+  }
+
+  public Long getPrice() {
+    return price;
+  }
+
+  public void setPrice(Long price) {
+    this.price = price;
   }
 } // end class Commodity

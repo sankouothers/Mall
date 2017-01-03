@@ -1,36 +1,25 @@
-package com.wang.extmall.model;
+package com.wang.extmall.command;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import com.wang.extmall.model.Address;
+import com.wang.extmall.model.User;
 
 
 /**
- * Created by ozintel06 on 2016/12/20.
+ * Created by ozintel06 on 2016/12/26.
  *
  * @author   <a href="mailto:pin.wang@ozstrategy.com">Pin Wang</a>
- * @version  12/20/2016 16:00
+ * @version  12/28/2016 11:53
  */
-@Entity public class Address {
+public class AddressCommand {
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
-  @Column(
-    length   = 50,
-    nullable = false
-  )
   private String address;
 
-  @JoinColumn(name = "consumerId")
-  @ManyToOne private User consumer;
-
-  @Column(nullable = false)
-  private String   defaultAddress;
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  @Id private Long id;
+  private User   consumer;
+  private String defaultAddress;
+  private String consumerName;
+  private Long   id;
+  private Integer   consumerId;
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
@@ -119,4 +108,55 @@ import javax.persistence.ManyToOne;
   public void setId(Long id) {
     this.id = id;
   }
-} // end class Address
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * toAddress.
+   *
+   * @return  Address
+   */
+  public Address toAddress() {
+    Address address = new Address();
+    address.setAddress(this.address);
+    address.setId(this.id);
+    address.setConsumer(this.consumer);
+    address.setDefaultAddress(this.defaultAddress);
+
+    return address;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * toAddressInfo.
+   *
+   * @param  address  Address
+   */
+  public void toAddressInfo(Address address) {
+    this.setDefaultAddress(address.getDefaultAddress());
+    if(address.getConsumer()!= null){
+      this.setConsumerName(address.getConsumer().getName());
+      this.setConsumerId(address.getConsumer().getId().intValue());
+    }
+
+    this.setId(address.getId());
+    this.setAddress(address.getAddress());
+  }
+
+  public Integer getConsumerId() {
+    return consumerId;
+  }
+
+  public void setConsumerId(Integer consumerId) {
+    this.consumerId = consumerId;
+  }
+
+  public String getConsumerName() {
+    return consumerName;
+  }
+
+  public void setConsumerName(String consumerName) {
+    this.consumerName = consumerName;
+  }
+} // end class AddressCommand

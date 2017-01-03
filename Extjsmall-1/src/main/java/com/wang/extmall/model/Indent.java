@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 
 /**
@@ -41,6 +42,9 @@ import javax.persistence.ManyToOne;
 
   @Column(nullable = false)
   private String phoneNumber;
+
+  @Column(nullable = false)
+  private Integer price;
 
   @Column(nullable = false)
   private String status;
@@ -128,6 +132,18 @@ import javax.persistence.ManyToOne;
    */
   public String getPhoneNumber() {
     return phoneNumber;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+
+  /**
+   * getter method for price.
+   *
+   * @return  Integer
+   */
+  public Integer getPrice() {
+    return price;
   }
 
   //~ ------------------------------------------------------------------------------------------------------------------
@@ -243,6 +259,17 @@ import javax.persistence.ManyToOne;
   //~ ------------------------------------------------------------------------------------------------------------------
 
   /**
+   * setter method for price.
+   *
+   * @param  price  Integer
+   */
+  public void setPrice(Integer price) {
+    this.price = price;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
    * setter method for status.
    *
    * @param  status  String
@@ -272,6 +299,4 @@ import javax.persistence.ManyToOne;
   public void setTotalPrice(Integer totalPrice) {
     this.totalPrice = totalPrice;
   }
-
-
 } // end class Indent

@@ -66,7 +66,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
         .authorizeRequests()
         //        定义不用限制的路径
 //        .antMatchers("请求路径").permitAll()
-        .antMatchers("/extmall").permitAll()
+        .antMatchers("/extmall/**").permitAll()
+        .antMatchers("/user/**").permitAll()
+        .antMatchers("/commodity/**").permitAll()
+        .antMatchers("/indent/**").permitAll()
+        .antMatchers("/address/**").permitAll()
         //        定义需要控制访问的路径
 //        .antMatchers("请求路径").hasRole("角色")
 //        .antMatchers("/extmall").hasRole("USER")
