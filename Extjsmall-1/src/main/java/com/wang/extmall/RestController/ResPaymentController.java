@@ -1,7 +1,6 @@
-package com.wang.extmall.RestController;
+package com.wang.extmall.restController;
 
 import com.wang.extmall.command.IndentCommand;
-import com.wang.extmall.model.Commodity;
 import com.wang.extmall.model.Indent;
 import com.wang.extmall.service.CommodityService;
 import com.wang.extmall.service.IndentService;
@@ -24,7 +23,7 @@ public class ResPaymentController {
   @Autowired
   private CommodityService commodityService;
 
-  @RequestMapping(value = "/indent",method = RequestMethod.POST)
+  @RequestMapping(value = "payment/indent",method = RequestMethod.POST)
   public ResponseEntity createIndent(IndentCommand indentCommand) {
 
     Indent indent = indentCommand.toIndent();

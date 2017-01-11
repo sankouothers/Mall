@@ -1,4 +1,4 @@
-package com.wang.extmall.RestController;
+package com.wang.extmall.restController;
 
 import java.util.Date;
 import java.util.List;

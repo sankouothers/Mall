@@ -1,4 +1,4 @@
-package com.wang.extmall.RestController;
+package com.wang.extmall.restController;
 
 import com.wang.extmall.command.AddressCommand;
 import com.wang.extmall.model.Address;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

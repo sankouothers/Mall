@@ -354,5 +354,6 @@ public class UserCommand {
     this.setId(user.getId());
     this.setQuestion(user.getQuestion());
     this.setPhoneNumber(user.getPhoneNumber());
+    this.setName(user.getName());
   }
 } // end class UserCommand

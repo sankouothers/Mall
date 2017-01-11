@@ -1,9 +1,7 @@
-package com.wang.extmall.RestController;
+package com.wang.extmall.restController;
 
 import com.wang.extmall.command.CommodityCommand;
-import com.wang.extmall.command.IndentCommand;
 import com.wang.extmall.model.Commodity;
-import com.wang.extmall.model.Indent;
 import com.wang.extmall.service.AddressService;
 import com.wang.extmall.service.CommodityService;
 import com.wang.extmall.service.IndentService;
