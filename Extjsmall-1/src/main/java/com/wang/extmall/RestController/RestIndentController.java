@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Date;
+
 /**
  * Created by ozintel06 on 2016/11/30.
  */
@@ -25,7 +27,9 @@ public class RestIndentController {
   @RequestMapping(value = "/indent",method = RequestMethod.POST)
   public ResponseEntity createIndent(IndentCommand indentCommand) {
 
-    Indent indent = indentCommand.toAddress();
+    Indent indent = indentCommand.toIndent();
+    indent.setStatus("create");
+    indent.setCreateDate(new Date());
     indentService.save(indent);
 
     return new ResponseEntity(HttpStatus.OK);

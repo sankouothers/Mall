@@ -1,7 +1,13 @@
 package com.wang.extmall.restController;
 
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.json.JsonHierarchicalStreamDriver;
+import com.thoughtworks.xstream.io.json.JsonWriter;
+import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
+import com.thoughtworks.xstream.io.xml.XppDriver;
 import org.junit.Before;
 
+import org.junit.BeforeClass;
 import org.junit.runner.RunWith;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +16,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import com.thoughtworks.xstream.XStream;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
@@ -18,6 +25,8 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 import org.springframework.web.context.WebApplicationContext;
 
 import com.wang.extmall.Application;
+
+import java.io.Writer;
 
 
 /**
@@ -33,6 +42,8 @@ import com.wang.extmall.Application;
 
   /** TODO: DOCUMENT ME! */
   protected MockMvc mockMvc;
+  protected XStream xmlConverter;
+  protected XStream jsonConverter = null;
 
   /** TODO: DOCUMENT ME! */
   @Autowired WebApplicationContext webApplicationContext;

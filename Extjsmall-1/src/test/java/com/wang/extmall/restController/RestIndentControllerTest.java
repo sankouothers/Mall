@@ -5,8 +5,10 @@ import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.Is.is;
 
 import org.junit.Test;
+import org.springframework.http.MediaType;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -50,22 +52,16 @@ public class RestIndentControllerTest extends BaseControllerTest {
     //J+
   }
 
-// @Test
-// public void createIndent() throws Exception {
-//
-// ObjectMapper objectMapper = new ObjectMapper();
-//
-// IndentCommand indentCommand = new IndentCommand();
-//
-// //J-
-// byte[] requestJson =  objectMapper.writeValueAsBytes(indentCommand);
-//
-// mockMvc.perform(post("/indent")
-// .contentType(MediaType.APPLICATION_JSON)
-// .content(requestJson))
-// .andDo(print())
-// .andExpect(status().isOk())
-// .andReturn();
-// //J+
-// }
+ @Test
+ public void createIndent() throws Exception {
+
+ mockMvc.perform(post("/indent")
+     .param("phoneNumber","19911919191")
+     .param("totalNumber","2233")
+     .param("price","1212")
+     .param("totalPrice","123123")
+     .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+ .andExpect(status().isOk());
+ //J+
+ }
 } // end class RestIndentControllerTest

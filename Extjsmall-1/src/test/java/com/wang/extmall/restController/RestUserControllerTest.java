@@ -2,12 +2,20 @@ package com.wang.extmall.restController;
 
 
 import java.io.IOException;
+import java.io.Writer;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 
 import static org.hamcrest.core.Is.is;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
+import com.thoughtworks.xstream.io.xml.PrettyPrintWriter;
+import com.thoughtworks.xstream.io.xml.XppDriver;
+import com.wang.extmall.command.UserCommand;
 import org.junit.Test;
+import org.springframework.http.MediaType;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -95,29 +103,39 @@ public class RestUserControllerTest extends BaseControllerTest {
     //J+
   }
 
-// @Test public void createUser() throws Exception {
-//
-// ObjectMapper objectMapper = new ObjectMapper();
-//
-// UserCommand userCommand = new UserCommand();
-// userCommand.setName("qqq");
-// userCommand.setiDCardNumber("4211231994081210011");
-// userCommand.setAnswer("yes");
-// userCommand.setUserName("zhangSan");
-// userCommand.setQuestion("ta shi?");
-// userCommand.setPassWord("wang123");
-// userCommand.setPhoneNumber("19911919191");
-// //J-
+ @Test public void createUser() throws Exception {
+
+ ObjectMapper objectMapper = new ObjectMapper();
+
+ UserCommand userCommand = new UserCommand();
+ userCommand.setName("qqq");
+ userCommand.setiDCardNumber("4211231994081210011");
+ userCommand.setAnswer("yes");
+ userCommand.setUserName("zhangSan");
+ userCommand.setQuestion("ta shi?");
+ userCommand.setPassWord("wang123");
+ userCommand.setPhoneNumber("19911919191");
+ //J-
+//   xmlConverter = new XStream(new XppDriver() {
+//     @Override public HierarchicalStreamWriter createWriter(Writer writer) {
+//       return new PrettyPrintWriter(writer);
+//     }
+//   });
+//   String string = xmlConverter.toXML(userCommand);
 // byte[] requestJson =  objectMapper.writeValueAsBytes(userCommand);
-//
-// mockMvc.perform(post("/user")
-// .contentType(MediaType.APPLICATION_JSON)
-// .content(requestJson))
-// .andDo(print())
-// .andExpect(status().isOk())
-// .andReturn();
-// //J+
-// }
+
+ mockMvc.perform(post("/user")
+     .param("answer","yes")
+     .param("iDCardNumber","421123199408210011")
+     .param("name","qqq")
+     .param("userName","zhangSan")
+     .param("question","ta shi?")
+     .param("passWord","wang123")
+     .param("phoneNumber","19911919191")
+     .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+     .andExpect(status().isOk());
+ //J+
+ }
 
 // @Autowired
 // void setConverters(HttpMessageConverter<?>[] converters) {

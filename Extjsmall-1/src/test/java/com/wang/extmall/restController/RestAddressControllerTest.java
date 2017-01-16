@@ -1,6 +1,12 @@
 package com.wang.extmall.restController;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.wang.extmall.command.AddressCommand;
+import org.junit.Test;
+import org.springframework.http.MediaType;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
 /**
@@ -10,22 +16,15 @@ import com.wang.extmall.command.AddressCommand;
  * @version  01/11/2017 23:30
  */
 public class RestAddressControllerTest extends BaseControllerTest {
-// @Test
-// public void createAddress() throws Exception {
-//
-// ObjectMapper objectMapper = new ObjectMapper();
-//
-// AddressCommand addressCommand = new AddressCommand();
-//
-// //J-
-// byte[] requestJson =  objectMapper.writeValueAsBytes(addressCommand);
-//
-// mockMvc.perform(post("/indent")
-// .contentType(MediaType.APPLICATION_JSON)
-// .content(requestJson))
-// .andDo(print())
-// .andExpect(status().isOk())
-// .andReturn();
-// //J+
-// }
+ @Test
+ public void createAddress() throws Exception {
+
+ //J-
+ mockMvc.perform(post("/address")
+     .param("address","wwwwwwww")
+     .param("defaultAddress","Y")
+     .contentType(MediaType.APPLICATION_FORM_URLENCODED))
+ .andExpect(status().isOk());
+ //J+
+ }
 }
