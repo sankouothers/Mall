@@ -28,16 +28,16 @@ public class RestCommodityCrollerTest extends BaseControllerTest {
   @Test public void getAllCommodity() throws Exception {
     //J-
     mockMvc.perform(get("/commodity"))
-        .andExpect(jsonPath("$[0].brand", is(equalTo("qqq"))))
-        .andExpect(jsonPath("$[0].category", is(equalTo("www"))))
-        .andExpect(jsonPath("$[0].createDate", is(equalTo(null))))
-        .andExpect(jsonPath("$[0].createDateString", is(equalTo("2016-12-28"))))
-        .andExpect(jsonPath("$[0].creator", is(equalTo(null))))
-        .andExpect(jsonPath("$[0].creatorId", is(equalTo(1))))
-        .andExpect(jsonPath("$[0].creatorName", is(equalTo("pin"))))
-        .andExpect(jsonPath("$[0].effect", is(equalTo("eee"))))
-        .andExpect(jsonPath("$[0].id", is(equalTo(1))))
-        .andExpect(jsonPath("$[0].name", is(equalTo("xiezi"))))
+        .andExpect(jsonPath("$[2].brand", is(equalTo("李宁"))))
+        .andExpect(jsonPath("$[2].category", is(equalTo("运动服"))))
+        .andExpect(jsonPath("$[2].createDate", is(equalTo(null))))
+        .andExpect(jsonPath("$[2].createDateString", is(equalTo("2016-12-28"))))
+        .andExpect(jsonPath("$[2].creator", is(equalTo(null))))
+        .andExpect(jsonPath("$[2].creatorId", is(equalTo(1))))
+        .andExpect(jsonPath("$[2].creatorName", is(equalTo("pin"))))
+        .andExpect(jsonPath("$[2].effect", is(equalTo("男装"))))
+        .andExpect(jsonPath("$[2].id", is(equalTo(1))))
+        .andExpect(jsonPath("$[2].name", is(equalTo("李宁男款黑色运动服"))))
         .andExpect(status().isOk());
     //J+
   }

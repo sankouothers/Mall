@@ -16,6 +16,18 @@
         <relativePath/>
     </parent>
 
+    <properties>
+        <hibernate.dialect>org.hibernate.dialect.MySQL5InnoDBDialect</hibernate.dialect>
+        <jdbc.groupId>mysql</jdbc.groupId>
+        <jdbc.artifactId>mysql-connector-java</jdbc.artifactId>
+        <jdbc.version>5.0.5</jdbc.version>
+        <jdbc.driverClassName>com.mysql.jdbc.Driver</jdbc.driverClassName>
+        <db.name>extjs_mall</db.name>
+        <jdbc.url>
+            <![CDATA[jdbc:mysql://localhost/${db.name}?createDatabaseIfNotExist=true&amp;useUnicode=true&amp;characterEncoding=utf-8]]></jdbc.url>
+        <jdbc.username>root</jdbc.username>
+        <jdbc.password>Passw0rd</jdbc.password>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -77,6 +89,82 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>sql-maven-plugin</artifactId>
+                <version>1.5</version>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>${jdbc.groupId}</groupId>
+                        <artifactId>${jdbc.artifactId}</artifactId>
+                        <version>${jdbc.version}</version>
+                    </dependency>
+                </dependencies>
+
+                <configuration>
+                    <driver>${jdbc.driverClassName}</driver>
+                    <username>${jdbc.username}</username>
+                    <password>${jdbc.password}</password>
+                    <url>${jdbc.url}&amp;sessionVariables=FOREIGN_KEY_CHECKS=0</url>
+                </configuration>
+
+                <executions>
+                    <execution>
+                        <id>drop-extjs_mall-database</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <url>jdbc:mysql://localhost</url>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>drop database ${db.name}</sqlCommand>
+                            <onError>continue</onError>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-extjs_mall-database</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <url>jdbc:mysql://localhost</url>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>CREATE database ${db.name}</sqlCommand>
+                            <onError>abort</onError>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>use-extjs_mall-database</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <url>jdbc:mysql://localhost</url>
+                            <autocommit>true</autocommit>
+                            <sqlCommand>USE ${db.name}</sqlCommand>
+                            <onError>abort</onError>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>create-extjs_mall-structure-sample-data</id>
+                        <phase>process-test-resources</phase>
+                        <goals>
+                            <goal>execute</goal>
+                        </goals>
+                        <configuration>
+                            <autocommit>true</autocommit>
+                            <srcFiles>
+                                <srcFile>src/main/resources/mateData.sql</srcFile>
+                            </srcFiles>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

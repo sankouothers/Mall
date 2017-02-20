@@ -35,7 +35,9 @@ CREATE TABLE `Address` (
 --  Records of `Address`
 -- ----------------------------
 BEGIN;
-INSERT INTO `Address` VALUES ('1', 'qweqweqwe', 'Y', '1');
+INSERT INTO `Address` VALUES ('1', '慕和南道3-2-301', 'Y', '1');
+INSERT INTO `Address` VALUES ('2', '幸福家园6-1-504', 'N', '1');
+INSERT INTO `Address` VALUES ('3', '汪家琓', 'N', '1');
 COMMIT;
 
 -- ----------------------------
@@ -60,7 +62,9 @@ CREATE TABLE `Commodity` (
 --  Records of `Commodity`
 -- ----------------------------
 BEGIN;
-INSERT INTO `Commodity` VALUES ('1', 'qqq', 'www', '2016-12-28 13:59:11', 'eee', 'xiezi', '1', '0');
+INSERT INTO `Commodity` VALUES ('1', '李宁', '运动服', '2016-12-28 00:00:00', '男装', '李宁男款黑色运动服', '1', '50');
+INSERT INTO `Commodity` VALUES ('2', '安踏', '板鞋', '2016-12-29 00:00:00', '男鞋', '安踏男款白色板鞋', '1', '100');
+INSERT INTO `Commodity` VALUES ('3', '苏泊尔', '电饭锅', '2016-12-30 00:00:00', '家用电器', '苏泊尔电饭锅', '1', '150');
 COMMIT;
 
 -- ----------------------------

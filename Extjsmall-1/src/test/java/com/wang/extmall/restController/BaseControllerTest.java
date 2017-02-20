@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.WebIntegrationTest;
 
+import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.thoughtworks.xstream.XStream;
 import org.springframework.test.context.web.WebAppConfiguration;
@@ -41,7 +42,7 @@ import java.io.Writer;
   //~ Instance fields --------------------------------------------------------------------------------------------------
 
   /** TODO: DOCUMENT ME! */
-  protected MockMvc mockMvc;
+  MockMvc mockMvc;
   protected XStream xmlConverter;
   protected XStream jsonConverter = null;
 
