@@ -21,6 +21,18 @@ public class AddressCommand {
   private Long   id;
   private Integer   consumerId;
 
+  public AddressCommand() {}
+
+  public AddressCommand(Address address) {
+    this.address = address.getAddress();
+    this.id = address.getId();
+    this.defaultAddress = address.getDefaultAddress();
+    if (address.getConsumer() != null) {
+      this.consumerName = address.getConsumer().getName();
+      this.consumerId = Integer.valueOf(String.valueOf(address.getConsumer().getId()));
+    }
+  }
+
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
   /**
