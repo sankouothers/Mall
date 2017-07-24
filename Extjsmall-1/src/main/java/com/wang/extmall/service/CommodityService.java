@@ -13,4 +13,6 @@ public interface CommodityService {
   List<Commodity> findByOrderByCreateDateDesc();
 
   Commodity findOne(long id);
+
+  Commodity save(Commodity commodity);
 }

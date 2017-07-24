@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -51,6 +52,20 @@ public class RestCommodityController {
     commodityCommand.toCommodityInfo(commodity);
 
     return new ResponseEntity<CommodityCommand>(commodityCommand,HttpStatus.OK);
+  }
+
+  @RequestMapping(value = "/commodity",method = RequestMethod.POST)
+  public ResponseEntity<Commodity> createCommodity(CommodityCommand commodityCommand) {
+    Commodity commodity = commodityCommand.toCommodityInfo();
+    commodity.setCreateDate(new Date());
+    return new ResponseEntity<Commodity>(commodityService.save(commodity),HttpStatus.CREATED);
+  }
+
+
+  @RequestMapping(value = "/commodity",method = RequestMethod.PATCH)
+  public ResponseEntity<CommodityCommand> updateCommodity(CommodityCommand commodityCommand) {
+
+    return new ResponseEntity<CommodityCommand>(commodityCommand,HttpStatus.CREATED);
   }
 
 }

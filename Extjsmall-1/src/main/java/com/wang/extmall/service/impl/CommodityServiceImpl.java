@@ -37,4 +37,9 @@ public class CommodityServiceImpl implements CommodityService {
     return commodityRepository.findOne(id);
   }
 
+  @Override
+  public Commodity save(Commodity commodity) {
+    return commodityRepository.save(commodity);
+  }
+
 }

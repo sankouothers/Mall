@@ -27,6 +27,7 @@ public class CommodityCommand {
   private String  effect;
   private Long    id;
   private String  name;
+  private Integer price;
 
   //~ Methods ----------------------------------------------------------------------------------------------------------
 
@@ -141,6 +142,17 @@ public class CommodityCommand {
   //~ ------------------------------------------------------------------------------------------------------------------
 
   /**
+   * getter method for price.
+   *
+   * @return  Integer
+   */
+  public Integer getPrice() {
+    return price;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
    * setter method for brand.
    *
    * @param  brand  String
@@ -246,6 +258,47 @@ public class CommodityCommand {
    */
   public void setName(String name) {
     this.name = name;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * setter method for price.
+   *
+   * @param  price  Integer
+   */
+  public void setPrice(Integer price) {
+    this.price = price;
+  }
+
+  //~ ------------------------------------------------------------------------------------------------------------------
+
+  /**
+   * toCommodityInfo.
+   *
+   * @return  Commodity
+   */
+  public Commodity toCommodityInfo() {
+    Commodity commodity = new Commodity();
+    commodity.setBrand(this.brand);
+    commodity.setCategory(this.category);
+
+    if (this.getCreatorId() != null) {
+      User user = new User();
+      user.setId(this.getCreatorId().longValue());
+      commodity.setCreator(user);
+    }
+
+    commodity.setEffect(this.effect);
+
+    if (this.getId() != null) {
+      commodity.setId(this.id);
+    }
+
+    commodity.setName(this.name);
+    commodity.setPrice(this.price.longValue());
+
+    return commodity;
   }
 
   //~ ------------------------------------------------------------------------------------------------------------------
