@@ -34,7 +34,10 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
         .antMatchers("/bootstrap/**")
         .and()
         .ignoring()
-        .antMatchers("/ext-6.2.0/**");
+        .antMatchers("/ext-6.2.0/**")
+        .and()
+        .ignoring()
+        .antMatchers("/swagger/**");
   }
 
   //~ ------------------------------------------------------------------------------------------------------------------
@@ -71,21 +74,22 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
         .antMatchers("/commodity/**").permitAll()
         .antMatchers("/indent/**").permitAll()
         .antMatchers("/address/**").permitAll()
+        .antMatchers("/swagger/**").permitAll();
         //        定义需要控制访问的路径
 //        .antMatchers("请求路径").hasRole("角色")
 //        .antMatchers("/extmall").hasRole("USER")
-        .anyRequest().authenticated()
+//        .anyRequest().authenticated()
 //      formLogin()定义当需要用户登录时候，转到的登录页面
-        .and()
-        .formLogin()
-        .loginPage("/login")
-        .usernameParameter("name")
-        .passwordParameter("passWord")
-        .failureUrl("/login?error=true")
-        .permitAll()
-        .and()
-        .logout()
-        .permitAll();
+//        .and()
+//        .formLogin()
+//        .loginPage("/login")
+//        .usernameParameter("name")
+//        .passwordParameter("passWord")
+//        .failureUrl("/login?error=true")
+//        .permitAll()
+//        .and()
+//        .logout()
+//        .permitAll();
     http.headers().frameOptions().disable();
   }
 }
