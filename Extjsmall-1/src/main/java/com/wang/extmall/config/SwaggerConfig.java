@@ -65,14 +65,12 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
         .genericModelSubstitutes(DeferredResult.class)
         .useDefaultResponseMessages(false)
         .forCodeGeneration(false)
-        .pathMapping("/")                                           //设置请求的统一前缀(所有的 API 请求路径前面都会加上这个前缀)
-        .select()                                                   // 选择那些路径和api会生成document
-//        .apis(RequestHandlerSelectors.any())                      // 对所有api进行监控
-//        .paths(**)                                                //可以根据url路径设置哪些请求加入文档，忽略哪些请求
-        .paths(Predicates.not(PathSelectors.regex("/error")))       // 过滤接口,忽略匹配的请求接口
+        .pathMapping("/")
+        .select()
+        .paths(Predicates.not(PathSelectors.regex("/error")))
         .build()
-        .select().paths(Predicates.or(regex("/user.*"))).build() // 过滤接口,只会显示匹配的接口
-        .ignoredParameterTypes(ApiIgnore.class)                     //注解复杂参数的配置（例:UserCommand）
+        .select().paths(Predicates.or(regex("/user.*"))).build()
+        .ignoredParameterTypes(ApiIgnore.class)
         .apiInfo(mallApiInfo());
   }
 
