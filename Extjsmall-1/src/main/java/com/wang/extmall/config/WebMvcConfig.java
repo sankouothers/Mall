@@ -49,7 +49,7 @@ import java.util.List;
    */
   @Bean public InternalResourceViewResolver viewResolver() {
     InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-    resolver.setPrefix("/WEB-INF/pages/");
+    resolver.setPrefix("/WEB-INF/angularjs/");
     resolver.setSuffix(".jsp");
 
     return resolver;

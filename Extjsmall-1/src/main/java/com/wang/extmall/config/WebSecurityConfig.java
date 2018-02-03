@@ -74,7 +74,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
         .antMatchers("/commodity/**").permitAll()
         .antMatchers("/indent/**").permitAll()
         .antMatchers("/address/**").permitAll()
-        .antMatchers("/swagger/**").permitAll();
+        .antMatchers("/swagger/**").permitAll()
+        .antMatchers("/angularjs/**").permitAll();
         //        定义需要控制访问的路径
 //        .antMatchers("请求路径").hasRole("角色")
 //        .antMatchers("/extmall").hasRole("USER")
