@@ -314,6 +314,7 @@ public class CommodityCommand {
     this.setCategory(commodity.getCategory());
     this.setEffect(commodity.getEffect());
     this.setName(commodity.getName());
+    this.setPrice(Integer.parseInt(commodity.getPrice().toString()));
 
     if (commodity.getCreateDate() != null) {
       this.setCreateDateString(Util.sdf.format(commodity.getCreateDate()));
