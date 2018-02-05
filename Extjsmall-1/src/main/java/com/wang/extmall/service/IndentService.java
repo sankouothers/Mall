@@ -15,4 +15,6 @@ public interface IndentService {
   Indent findOne(long id);
 
   List<Indent> findByConsumer(User consumer);
+
+  List<Indent> findByOrderByCreateDateDesc();
 }

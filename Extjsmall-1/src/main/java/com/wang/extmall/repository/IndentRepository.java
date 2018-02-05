@@ -11,4 +11,6 @@ import org.springframework.data.repository.CrudRepository;
 public interface IndentRepository extends CrudRepository<Indent, Long> {
 
   List<Indent> findByConsumer(User consumer);
+
+  List<Indent> findByOrderByCreateDateDesc();
 }

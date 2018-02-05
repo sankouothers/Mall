@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by ozintel06 on 2016/11/30.
@@ -55,5 +57,17 @@ public class RestIndentController {
     indentCommand.toIndentInfo(indent);
 
     return new ResponseEntity<IndentCommand>(indentCommand,HttpStatus.OK);
+  }
+
+  @RequestMapping(value = "/indent/{id}",method = RequestMethod.GET)
+  public ResponseEntity<List<IndentCommand>> IndentList() {
+    List<Indent> commodityList = indentService.findByOrderByCreateDateDesc();
+    List<IndentCommand> indentCommandList = new ArrayList<IndentCommand>();
+    for (Indent commodity:commodityList) {
+      IndentCommand indentCommand = new IndentCommand();
+      indentCommand.toIndentInfo(commodity);
+      indentCommandList.add(indentCommand);
+    }
+    return new ResponseEntity<List<IndentCommand>>(indentCommandList,HttpStatus.OK);
   }
 }

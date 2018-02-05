@@ -32,4 +32,9 @@ import java.util.List;
   public List<Indent> findByConsumer(User consumer) {
     return indentRepository.findByConsumer(consumer);
   }
+
+  @Override
+  public List<Indent> findByOrderByCreateDateDesc() {
+    return indentRepository.findByOrderByCreateDateDesc();
+  }
 }
