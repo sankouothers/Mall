@@ -59,7 +59,7 @@ public class RestIndentController {
     return new ResponseEntity<IndentCommand>(indentCommand,HttpStatus.OK);
   }
 
-  @RequestMapping(value = "/indent/{id}",method = RequestMethod.GET)
+  @RequestMapping(value = "/indent",method = RequestMethod.GET)
   public ResponseEntity<List<IndentCommand>> IndentList() {
     List<Indent> commodityList = indentService.findByOrderByCreateDateDesc();
     List<IndentCommand> indentCommandList = new ArrayList<IndentCommand>();
