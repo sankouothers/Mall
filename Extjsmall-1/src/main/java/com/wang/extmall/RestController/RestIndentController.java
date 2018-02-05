@@ -2,7 +2,9 @@ package com.wang.extmall.restController;
 
 
 import com.wang.extmall.command.IndentCommand;
+import com.wang.extmall.model.Commodity;
 import com.wang.extmall.model.Indent;
+import com.wang.extmall.service.CommodityService;
 import com.wang.extmall.service.IndentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,16 +24,23 @@ public class RestIndentController {
 
   @Autowired
   private IndentService indentService;
+  @Autowired
+  private CommodityService commodityService;
 
 
-  @RequestMapping(value = "/indent",method = RequestMethod.POST)
-  public ResponseEntity createIndent(IndentCommand indentCommand) {
+  @RequestMapping(value = "/indent/create/{id}",method = RequestMethod.GET)
+  public ResponseEntity createIndent(@PathVariable("id") long id) {
 
-    Indent indent = indentCommand.toIndent();
+    Indent indent = new Indent();
+    Commodity commodity = commodityService.findOne(id);
+    indent.setCommodity(commodity);
+    indent.setPhoneNumber("12121212");
     indent.setStatus("create");
     indent.setCreateDate(new Date());
+    indent.setPrice(Integer.parseInt(commodity.getPrice().toString()));
+    indent.setTotalNumber(1);
+    indent.setTotalPrice(Integer.parseInt(commodity.getPrice().toString()));
     indentService.save(indent);
-
     return new ResponseEntity(HttpStatus.OK);
   }
 
